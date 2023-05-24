@@ -10,7 +10,7 @@ import {ErrorMessage} from "../model/error-message";
  * @param entity          the entity or undefined
  * @param res             the Express Response
  */
-const standardGetResponseWithIdentifier = (identifierField: String, identifier: Object, entity: any, res: Express.Response) => {
+const standardGetResponseWithIdentifier = (identifierField: string, identifier: Object, entity: any, res: Express.Response) => {
   if (entity !== undefined) {
     res.status(200).json(entity);
     return;
@@ -27,7 +27,7 @@ const standardGetResponseWithIdentifier = (identifierField: String, identifier: 
  * @param notFoundMessage the specific message to use in the 404 response (if entity is undefined)
  * @param res             the Express Response
  */
-const standardGetResponseWithMessage = (entity: any, notFoundMessage: String, res: Express.Response) => {
+const standardGetResponseWithMessage = (entity: any, notFoundMessage: string, res: Express.Response) => {
   if (entity !== undefined) {
     res.status(200).json(entity);
     return;
@@ -43,7 +43,7 @@ const standardGetResponseWithMessage = (entity: any, notFoundMessage: String, re
  * @param errorDetails the error message to use
  * @param res          the Express Response
  */
-const standardNotFoundResponse = (errorDetails: String, res: Express.Response) => {
+const standardNotFoundResponse = (errorDetails: string, res: Express.Response) => {
   res.status(404).json(new ErrorMessage(404, errorDetails).toMap());
 }
 
@@ -54,7 +54,7 @@ const standardNotFoundResponse = (errorDetails: String, res: Express.Response) =
  * @param entity   the new entity
  * @param res      the Express Response
  */
-const standardPostResponse = (location: String, entity: any, res: Express.Response) => {
+const standardPostResponse = (location: string, entity: any, res: Express.Response) => {
   res.status(201).set('Location', location).json(entity);
 }
 
@@ -94,7 +94,7 @@ const standardDeleteResponseWithEntity = (deletedEntity: any, res: Express.Respo
  * @param errorDetails the error message to use
  * @param res          the Express Response
  */
-const standardBadRequestResponse = (errorDetails: String, res: Express.Response) => {
+const standardBadRequestResponse = (errorDetails: string, res: Express.Response) => {
   res.status(400).json(new ErrorMessage(400, errorDetails).toMap());
 }
 
@@ -105,7 +105,7 @@ const standardBadRequestResponse = (errorDetails: String, res: Express.Response)
  * @param errorDetails the error message to use
  * @param res          the Express Response
  */
-const standardUnauthorizedResponse = (errorDetails: String, res: Express.Response) => {
+const standardUnauthorizedResponse = (errorDetails: string, res: Express.Response) => {
   res.status(401).json(new ErrorMessage(401, errorDetails).toMap());
 }
 
@@ -119,7 +119,7 @@ const standardUnauthorizedResponse = (errorDetails: String, res: Express.Respons
  * @param errorDetails the error message to use
  * @param res          the Express Response
  */
-const standardErrorResponse = (status: Number, errorDetails: String, res: Express.Response) => {
+const standardErrorResponse = (status: number, errorDetails: string, res: Express.Response) => {
   res.status(status).json(new ErrorMessage(status, errorDetails).toMap());
 }
 
