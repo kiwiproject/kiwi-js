@@ -1,5 +1,5 @@
 import {Express} from "express";
-import {ErrorMessage} from "./errorMessage";
+import {ErrorMessage} from "../model/error-message";
 
 /**
  * Returns a 200 OK response if the entity contains a value. Otherwise, returns a 404 Not Found response with
@@ -10,7 +10,7 @@ import {ErrorMessage} from "./errorMessage";
  * @param entity          the entity or undefined
  * @param res             the Express Response
  */
-export const standardGetResponseWithIdentifier = (identifierField: String, identifier: Object, entity: any, res: Express.Response) => {
+const standardGetResponseWithIdentifier = (identifierField: String, identifier: Object, entity: any, res: Express.Response) => {
   if (entity !== undefined) {
     res.status(200).json(entity);
     return;
@@ -27,7 +27,7 @@ export const standardGetResponseWithIdentifier = (identifierField: String, ident
  * @param notFoundMessage the specific message to use in the 404 response (if entity is undefined)
  * @param res             the Express Response
  */
-export const standardGetResponseWithMessage = (entity: any, notFoundMessage: String, res: Express.Response) => {
+const standardGetResponseWithMessage = (entity: any, notFoundMessage: String, res: Express.Response) => {
   if (entity !== undefined) {
     res.status(200).json(entity);
     return;
@@ -43,7 +43,7 @@ export const standardGetResponseWithMessage = (entity: any, notFoundMessage: Str
  * @param errorDetails the error message to use
  * @param res          the Express Response
  */
-export const standardNotFoundResponse = (errorDetails: String, res: Express.Response) => {
+const standardNotFoundResponse = (errorDetails: String, res: Express.Response) => {
   res.status(404).json(new ErrorMessage(404, errorDetails).toMap());
 }
 
@@ -54,7 +54,7 @@ export const standardNotFoundResponse = (errorDetails: String, res: Express.Resp
  * @param entity   the new entity
  * @param res      the Express Response
  */
-export const standardPostResponse = (location: String, entity: any, res: Express.Response) => {
+const standardPostResponse = (location: String, entity: any, res: Express.Response) => {
   res.status(201).set('Location', location).json(entity);
 }
 
@@ -64,7 +64,7 @@ export const standardPostResponse = (location: String, entity: any, res: Express
  * @param entity the updated entity
  * @param res    the Express Response
  */
-export const standardPutResponse = (entity: any, res: Express.Response) => {
+const standardPutResponse = (entity: any, res: Express.Response) => {
   res.status(200).json(entity);
 }
 
@@ -73,7 +73,7 @@ export const standardPutResponse = (entity: any, res: Express.Response) => {
  *
  * @param res the Express Response
  */
-export const standardDeleteResponse = (res: Express.Response) => {
+const standardDeleteResponse = (res: Express.Response) => {
   res.status(204);
 }
 
@@ -83,7 +83,7 @@ export const standardDeleteResponse = (res: Express.Response) => {
  * @param deletedEntity the entity that was deleted
  * @param res           the Express Response
  */
-export const standardDeleteResponseWithEntity = (deletedEntity: any, res: Express.Response) => {
+const standardDeleteResponseWithEntity = (deletedEntity: any, res: Express.Response) => {
   res.status(204).json(deletedEntity);
 }
 
@@ -94,7 +94,7 @@ export const standardDeleteResponseWithEntity = (deletedEntity: any, res: Expres
  * @param errorDetails the error message to use
  * @param res          the Express Response
  */
-export const standardBadRequestResponse = (errorDetails: String, res: Express.Response) => {
+const standardBadRequestResponse = (errorDetails: String, res: Express.Response) => {
   res.status(400).json(new ErrorMessage(400, errorDetails).toMap());
 }
 
@@ -105,7 +105,7 @@ export const standardBadRequestResponse = (errorDetails: String, res: Express.Re
  * @param errorDetails the error message to use
  * @param res          the Express Response
  */
-export const standardUnauthorizedResponse = (errorDetails: String, res: Express.Response) => {
+const standardUnauthorizedResponse = (errorDetails: String, res: Express.Response) => {
   res.status(401).json(new ErrorMessage(401, errorDetails).toMap());
 }
 
@@ -119,7 +119,7 @@ export const standardUnauthorizedResponse = (errorDetails: String, res: Express.
  * @param errorDetails the error message to use
  * @param res          the Express Response
  */
-export const standardErrorResponse = (status: Number, errorDetails: String, res: Express.Response) => {
+const standardErrorResponse = (status: Number, errorDetails: String, res: Express.Response) => {
   res.status(status).json(new ErrorMessage(status, errorDetails).toMap());
 }
 
@@ -131,6 +131,20 @@ export const standardErrorResponse = (status: Number, errorDetails: String, res:
  * @param entity the accepted entity
  * @param res    the Express Response
  */
-export const standardAcceptedResponse = (entity: any, res: Express.Response) => {
+const standardAcceptedResponse = (entity: any, res: Express.Response) => {
   res.status(202).json(entity);
 }
+
+export const KiwiStandardResponsesExpress = {
+  standardGetResponseWithIdentifier,
+  standardGetResponseWithMessage,
+  standardPostResponse,
+  standardPutResponse,
+  standardDeleteResponse,
+  standardDeleteResponseWithEntity,
+  standardAcceptedResponse,
+  standardErrorResponse,
+  standardUnauthorizedResponse,
+  standardNotFoundResponse,
+  standardBadRequestResponse,
+};

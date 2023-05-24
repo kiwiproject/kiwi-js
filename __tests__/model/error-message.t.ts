@@ -1,5 +1,5 @@
 import { describe, it, expect } from '@jest/globals';
-import {ErrorMessage} from "../src/errorMessage";
+import {ErrorMessage} from "../../src";
 
 describe('ErrorMessage', () => {
   describe('toMap', () => {

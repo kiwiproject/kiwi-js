@@ -1,13 +1,2 @@
-export {
-  standardGetResponseWithIdentifier,
-  standardGetResponseWithMessage,
-  standardNotFoundResponse,
-  standardUnauthorizedResponse,
-  standardAcceptedResponse,
-  standardBadRequestResponse,
-  standardDeleteResponse,
-  standardDeleteResponseWithEntity,
-  standardErrorResponse,
-  standardPostResponse,
-  standardPutResponse
-} from './kiwiStandardResponses';
+export {ErrorMessage} from './model/error-message';
+export {KiwiStandardResponsesExpress} from './express/kiwi-standard-responses-express';
