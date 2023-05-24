@@ -6,12 +6,12 @@
  * field causes the error.
  */
 export class ErrorMessage {
-  private readonly fieldName: String;
-  private readonly itemId: String;
-  private readonly code: Number;
-  private readonly message: String;
+  private readonly fieldName: string;
+  private readonly itemId: string;
+  private readonly code: number;
+  private readonly message: string;
 
-  constructor(code: Number, message: String, fieldName: String = '', itemId: String = '') {
+  constructor(code: number, message: string, fieldName: string = '', itemId: string = '') {
     this.itemId = itemId;
     this.code = code;
     this.message = message;
