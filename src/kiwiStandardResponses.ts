@@ -1,5 +1,5 @@
-import { Express } from "express";
-import { ErrorMessage } from "./errorMessage";
+import {Express} from "express";
+import {ErrorMessage} from "./errorMessage";
 
 /**
  * Returns a 200 OK response if the entity contains a value. Otherwise, returns a 404 Not Found response with
@@ -11,12 +11,12 @@ import { ErrorMessage } from "./errorMessage";
  * @param res             the Express Response
  */
 export const standardGetResponseWithIdentifier = (identifierField: String, identifier: Object, entity: any, res: Express.Response) => {
-    if (entity !== undefined) {
-        res.status(200).json(entity);
-        return;
-    }
+  if (entity !== undefined) {
+    res.status(200).json(entity);
+    return;
+  }
 
-    standardNotFoundResponse(`Object with ${identifierField} ${identifier} not found`, res);
+  standardNotFoundResponse(`Object with ${identifierField} ${identifier} not found`, res);
 }
 
 /**
@@ -28,12 +28,12 @@ export const standardGetResponseWithIdentifier = (identifierField: String, ident
  * @param res             the Express Response
  */
 export const standardGetResponseWithMessage = (entity: any, notFoundMessage: String, res: Express.Response) => {
-    if (entity !== undefined) {
-        res.status(200).json(entity);
-        return;
-    }
+  if (entity !== undefined) {
+    res.status(200).json(entity);
+    return;
+  }
 
-    standardNotFoundResponse(notFoundMessage, res);
+  standardNotFoundResponse(notFoundMessage, res);
 }
 
 /**
@@ -44,7 +44,7 @@ export const standardGetResponseWithMessage = (entity: any, notFoundMessage: Str
  * @param res          the Express Response
  */
 export const standardNotFoundResponse = (errorDetails: String, res: Express.Response) => {
-    res.status(404).json(new ErrorMessage(404, errorDetails).toMap());
+  res.status(404).json(new ErrorMessage(404, errorDetails).toMap());
 }
 
 /**
@@ -55,7 +55,7 @@ export const standardNotFoundResponse = (errorDetails: String, res: Express.Resp
  * @param res      the Express Response
  */
 export const standardPostResponse = (location: String, entity: any, res: Express.Response) => {
-    res.status(201).set('Location', location).json(entity);
+  res.status(201).set('Location', location).json(entity);
 }
 
 /**
@@ -65,7 +65,7 @@ export const standardPostResponse = (location: String, entity: any, res: Express
  * @param res    the Express Response
  */
 export const standardPutResponse = (entity: any, res: Express.Response) => {
-    res.status(200).json(entity);
+  res.status(200).json(entity);
 }
 
 /**
@@ -74,7 +74,7 @@ export const standardPutResponse = (entity: any, res: Express.Response) => {
  * @param res the Express Response
  */
 export const standardDeleteResponse = (res: Express.Response) => {
-    res.status(204);
+  res.status(204);
 }
 
 /**
@@ -84,7 +84,7 @@ export const standardDeleteResponse = (res: Express.Response) => {
  * @param res           the Express Response
  */
 export const standardDeleteResponseWithEntity = (deletedEntity: any, res: Express.Response) => {
-    res.status(204).json(deletedEntity);
+  res.status(204).json(deletedEntity);
 }
 
 /**
@@ -95,7 +95,7 @@ export const standardDeleteResponseWithEntity = (deletedEntity: any, res: Expres
  * @param res          the Express Response
  */
 export const standardBadRequestResponse = (errorDetails: String, res: Express.Response) => {
-    res.status(400).json(new ErrorMessage(400, errorDetails).toMap());
+  res.status(400).json(new ErrorMessage(400, errorDetails).toMap());
 }
 
 /**
@@ -106,7 +106,7 @@ export const standardBadRequestResponse = (errorDetails: String, res: Express.Re
  * @param res          the Express Response
  */
 export const standardUnauthorizedResponse = (errorDetails: String, res: Express.Response) => {
-    res.status(401).json(new ErrorMessage(401, errorDetails).toMap());
+  res.status(401).json(new ErrorMessage(401, errorDetails).toMap());
 }
 
 /**
@@ -120,7 +120,7 @@ export const standardUnauthorizedResponse = (errorDetails: String, res: Express.
  * @param res          the Express Response
  */
 export const standardErrorResponse = (status: Number, errorDetails: String, res: Express.Response) => {
-    res.status(status).json(new ErrorMessage(status, errorDetails).toMap());
+  res.status(status).json(new ErrorMessage(status, errorDetails).toMap());
 }
 
 /**
@@ -132,5 +132,5 @@ export const standardErrorResponse = (status: Number, errorDetails: String, res:
  * @param res    the Express Response
  */
 export const standardAcceptedResponse = (entity: any, res: Express.Response) => {
-    res.status(202).json(entity);
+  res.status(202).json(entity);
 }

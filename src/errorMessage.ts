@@ -6,24 +6,24 @@
  * field causes the error.
  */
 export class ErrorMessage {
-    private readonly fieldName: String;
-    private readonly itemId: String;
-    private readonly code: Number;
-    private readonly message: String;
+  private readonly fieldName: String;
+  private readonly itemId: String;
+  private readonly code: Number;
+  private readonly message: String;
 
-    constructor(code: Number, message: String, fieldName: String='', itemId: String='') {
-        this.itemId = itemId;
-        this.code = code;
-        this.message = message;
-        this.fieldName = fieldName;
-    }
+  constructor(code: Number, message: String, fieldName: String = '', itemId: String = '') {
+    this.itemId = itemId;
+    this.code = code;
+    this.message = message;
+    this.fieldName = fieldName;
+  }
 
-    toMap() {
-        return {
-            message: this.message,
-            code: this.code,
-            fieldName: this.fieldName,
-            itemId: this.itemId
-        };
-    }
+  toMap() {
+    return {
+      message: this.message,
+      code: this.code,
+      fieldName: this.fieldName,
+      itemId: this.itemId
+    };
+  }
 }
