@@ -40,6 +40,12 @@ describe('KiwiPreconditions', () => {
         KiwiPreconditions.checkState(true, 'my error message');
       }).not.toThrow();
     });
+
+    it('should thorw an exception when false with default error message', () => {
+      expect(() => {
+        KiwiPreconditions.checkState(false);
+      }).toThrow('IllegalStateException');
+    });
   });
 
   describe('checkPositive', () => {
@@ -86,6 +92,12 @@ describe('KiwiPreconditions', () => {
         KiwiPreconditions.checkArgumentDefined('sample');
       }).not.toThrow();
     });
+
+    it('should throw an exception with a custom error message with given', () => {
+      expect(() => {
+        KiwiPreconditions.checkArgumentDefined(undefined, 'who am I?');
+      }).toThrow('IllegalArgumentException: who am I?');
+    })
   });
 
   describe('checkArgument', () => {
@@ -100,5 +112,43 @@ describe('KiwiPreconditions', () => {
         KiwiPreconditions.checkArgument(true);
       }).not.toThrow();
     });
+
+    it('should throw an exception with false with custom error message', () => {
+      expect(() => {
+        KiwiPreconditions.checkArgument(false, 'bad bad argument');
+      }).toThrow('IllegalArgumentException: bad bad argument');
+    })
+  });
+
+  describe('checkArgumentNotBlank', () => {
+    it('should throw an exception when argument is undefined', () => {
+      expect(() => {
+        KiwiPreconditions.checkArgumentNotBlank(undefined);
+      }).toThrow('IllegalArgumentException');
+    });
+
+    it('should throw an exception when argument is null', () => {
+      expect(() => {
+        KiwiPreconditions.checkArgumentNotBlank(null);
+      }).toThrow('IllegalArgumentException');
+    });
+
+    it('should throw an exception when argument is an empty str', () => {
+      expect(() => {
+        KiwiPreconditions.checkArgumentNotBlank('');
+      }).toThrow('IllegalArgumentException');
+    });
+
+    it('should not throw an exception when argument is defined and not null', () => {
+      expect(() => {
+        KiwiPreconditions.checkArgumentNotBlank('sample');
+      }).not.toThrow();
+    });
+
+    it('should throw an exception with a custom error message with given', () => {
+      expect(() => {
+        KiwiPreconditions.checkArgumentNotBlank(undefined, 'who am I?');
+      }).toThrow('IllegalArgumentException: who am I?');
+    })
   });
 });
