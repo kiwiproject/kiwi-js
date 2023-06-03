@@ -41,7 +41,7 @@ describe('KiwiPreconditions', () => {
       }).not.toThrow();
     });
 
-    it('should thorw an exception when false with default error message', () => {
+    it('should throw an exception when false with default error message', () => {
       expect(() => {
         KiwiPreconditions.checkState(false);
       }).toThrow('IllegalStateException');
