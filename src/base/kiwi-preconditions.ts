@@ -2,9 +2,10 @@ const checkPositiveOrZero = (value: number, errorMessage: string = 'value must b
   checkState(value >= 0, errorMessage);
 }
 
-const checkState = (expression: boolean, errorMessage: string) => {
+const checkState = (expression: boolean, errorMessage: string = undefined) => {
   if (!expression) {
-    throw new Error(`IllegalStateException: ${errorMessage}`);
+    const fullErrorMessage:string = errorMessage === undefined ? 'IllegalStateException' : `IllegalStateException: ${errorMessage}`;
+    throw new Error(fullErrorMessage);
   }
 }
 
@@ -12,19 +13,26 @@ const checkPositive = (value: number, errorMessage: string = 'value must be a po
   checkState(value > 0, errorMessage);
 }
 
-const checkArgumentDefined = (reference: any) => {
-  checkArgument(reference !== undefined && reference !== null);
+const checkArgumentDefined = (reference: any, errorMessage: string = undefined) => {
+  checkArgument(reference !== undefined && reference !== null, errorMessage);
 }
 
-const checkArgument = (expression: boolean) => {
+const checkArgument = (expression: boolean, errorMessage: string = undefined) => {
   if (!expression) {
-    throw new Error('IllegalArgumentException');
+    const fullErrorMessage:string = errorMessage === undefined ? 'IllegalArgumentException' : `IllegalArgumentException: ${errorMessage}`;
+    throw new Error(fullErrorMessage);
   }
+}
+
+const checkArgumentNotBlank = (str: string, errorMessage: string = undefined) => {
+  checkArgumentDefined(str, errorMessage)
+  checkArgument(str !== '', errorMessage);
 }
 
 export const KiwiPreconditions = {
   checkArgument,
   checkArgumentDefined,
+  checkArgumentNotBlank,
   checkState,
   checkPositive,
   checkPositiveOrZero,
