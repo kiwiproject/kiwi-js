@@ -53,6 +53,11 @@ export class KiwiPage {
    */
   pagingStartsWith: number = 0;
 
+  /**
+   * Optional extra supplementary data related to the page
+   */
+  supplementaryData: object = {};
+
   constructor(content: object[], size: number, number: number, numberOfElements: number, totalPages: number, totalElements: number, sort: KiwiSort) {
     this.content = content;
     this.size = size;
@@ -98,5 +103,10 @@ export class KiwiPage {
 
   isSorted(): boolean {
     return this.sort !== undefined && this.sort !== null;
+  }
+
+  addSupplementaryData(supplementaryData: object): this {
+    this.supplementaryData = supplementaryData;
+    return this;
   }
 }
