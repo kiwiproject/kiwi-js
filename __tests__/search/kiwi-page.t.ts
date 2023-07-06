@@ -56,6 +56,15 @@ describe('KiwiPage', () => {
     });
   });
 
+  describe('addSupplementaryData', () => {
+    it('should set the supplementary data on the KiwiPage', () => {
+      const page = KiwiPage.of(10, 1, 100, []);
+      page.addSupplementaryData({ aggregations: {} });
+
+      expect(page.supplementaryData).toEqual({ aggregations: {}});
+    });
+  });
+
   describe('usingZeroAsFirstPage', () => {
     it('should set pagingStartsWith to zero', () => {
       const page = KiwiPage.of(10, 1, 100, []);
