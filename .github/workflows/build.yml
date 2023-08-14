@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: ['16', '18', '20']
+        node_version: ['16', '18', '20']
     steps:
       # Check out the project
       - uses: actions/checkout@v3
@@ -51,7 +51,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
         run: tsc
 
-      # Run tests when Java version > 11 (Sonar runs tests and analysis on JDK 11)
+      # Run tests
       - name: Run tests
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
