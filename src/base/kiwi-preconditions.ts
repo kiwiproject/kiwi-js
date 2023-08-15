@@ -13,7 +13,7 @@ const checkPositive = (value: number, errorMessage: string = 'value must be a po
   checkState(value > 0, errorMessage);
 }
 
-const checkArgumentDefined = (reference: any, errorMessage: string = undefined) => {
+const checkArgumentDefined = (reference: unknown, errorMessage: string = undefined) => {
   checkArgument(reference !== undefined && reference !== null, errorMessage);
 }
 
