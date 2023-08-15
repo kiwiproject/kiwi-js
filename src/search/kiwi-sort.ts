@@ -6,7 +6,12 @@ export class KiwiSort {
   readonly ignoreCase: boolean;
   readonly ascending: boolean;
 
-  constructor(property: string, direction: string, ignoreCase: boolean, ascending: boolean) {
+  constructor(
+    property: string,
+    direction: string,
+    ignoreCase: boolean,
+    ascending: boolean,
+  ) {
     this.property = property;
     this.direction = direction;
     this.ignoreCase = ignoreCase;
@@ -14,18 +19,18 @@ export class KiwiSort {
   }
 
   static ofAscending(property: string): KiwiSort {
-    return KiwiSort.of(property, 'ASC');
+    return KiwiSort.of(property, "ASC");
   }
 
   static ofDescending(property: string): KiwiSort {
-    return KiwiSort.of(property, 'DESC');
+    return KiwiSort.of(property, "DESC");
   }
 
   static of(property: string, direction: string): KiwiSort {
     KiwiPreconditions.checkArgumentNotBlank(property);
     KiwiPreconditions.checkArgumentNotBlank(direction);
 
-    return new KiwiSort(property, direction, false, 'ASC' === direction);
+    return new KiwiSort(property, direction, false, "ASC" === direction);
   }
 
   isDescending(): boolean {

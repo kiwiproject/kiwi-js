@@ -11,7 +11,12 @@ export class ErrorMessage {
   private readonly code: number;
   private readonly message: string;
 
-  constructor(code: number, message: string, fieldName: string = '', itemId: string = '') {
+  constructor(
+    code: number,
+    message: string,
+    fieldName: string = "",
+    itemId: string = "",
+  ) {
     this.itemId = itemId;
     this.code = code;
     this.message = message;
@@ -23,7 +28,7 @@ export class ErrorMessage {
       message: this.message,
       code: this.code,
       fieldName: this.fieldName,
-      itemId: this.itemId
+      itemId: this.itemId,
     };
   }
 }

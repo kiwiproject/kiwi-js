@@ -1,5 +1,5 @@
-import { KiwiPreconditions } from '../base/kiwi-preconditions';
-import {KiwiSort} from "./kiwi-sort";
+import { KiwiPreconditions } from "../base/kiwi-preconditions";
+import { KiwiSort } from "./kiwi-sort";
 /**
  * Represents one page of an overall list of results.
  * <p>
@@ -58,7 +58,15 @@ export class KiwiPage {
    */
   supplementaryData: object = {};
 
-  constructor(content: object[], size: number, number: number, numberOfElements: number, totalPages: number, totalElements: number, sort: KiwiSort) {
+  constructor(
+    content: object[],
+    size: number,
+    number: number,
+    numberOfElements: number,
+    totalPages: number,
+    totalElements: number,
+    sort: KiwiSort,
+  ) {
     this.content = content;
     this.size = size;
     this.number = number;
@@ -68,13 +76,26 @@ export class KiwiPage {
     this.sort = sort;
   }
 
-  static of(pageNum: number, limit: number, total: number, contentList: object[]): KiwiPage {
+  static of(
+    pageNum: number,
+    limit: number,
+    total: number,
+    contentList: object[],
+  ): KiwiPage {
     KiwiPreconditions.checkPositiveOrZero(pageNum);
     KiwiPreconditions.checkPositive(limit);
     KiwiPreconditions.checkPositiveOrZero(total);
     KiwiPreconditions.checkArgumentDefined(contentList);
 
-    return new KiwiPage(contentList, limit, pageNum, contentList.length, Math.ceil(total / limit), total, undefined);
+    return new KiwiPage(
+      contentList,
+      limit,
+      pageNum,
+      contentList.length,
+      Math.ceil(total / limit),
+      total,
+      undefined,
+    );
   }
 
   addKiwiSort(sort: KiwiSort): this {
@@ -98,7 +119,7 @@ export class KiwiPage {
 
   isLast(): boolean {
     const offset = 1 - this.pagingStartsWith;
-    return this.number === (this.totalPages - offset);
+    return this.number === this.totalPages - offset;
   }
 
   isSorted(): boolean {
