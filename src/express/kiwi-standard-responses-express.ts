@@ -90,7 +90,7 @@ const standardPutResponse = (entity: unknown, res: Response) => {
  * @param res the Express Response
  */
 const standardDeleteResponse = (res: Response) => {
-  res.status(204);
+  res.sendStatus(204);
 };
 
 /**

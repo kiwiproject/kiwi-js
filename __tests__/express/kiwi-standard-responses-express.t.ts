@@ -117,7 +117,7 @@ describe("KiwiStandardResponses", () => {
     it("should setup a standard 204 response", () => {
       KiwiStandardResponsesExpress.standardDeleteResponse(res);
 
-      expect(res.status).toHaveBeenCalledWith(204);
+      expect(res.sendStatus).toHaveBeenCalledWith(204);
     });
   });
 
