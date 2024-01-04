@@ -1,17 +1,19 @@
 import { describe, it, expect } from "@jest/globals";
-import { ErrorMessage } from "../../src";
+import {ErrorMessage, ErrorResponse} from "../../src";
 
-describe("ErrorMessage", () => {
+describe("ErrorResponse", () => {
   describe("toMap", () => {
-    it("should convert error message to a json map", () => {
-      const errorMessage = new ErrorMessage(404, "Item not found");
-      const jsonMap = errorMessage.toMap();
+    it("should convert error response to a json map", () => {
+      const errorResponse = new ErrorResponse( "Validation Error", "id", 42, [new ErrorMessage("is required", "name")]);
+      const jsonMap = errorResponse.toMap();
 
       expect(jsonMap).toEqual({
-        message: "Item not found",
-        code: 404,
-        fieldName: "",
-        itemId: "",
+        message: "Validation Error",
+        fieldName: "id",
+        itemId: 42,
+        errors: [
+          { message: "is required", fieldName: "name" }
+        ]
       });
     });
   });

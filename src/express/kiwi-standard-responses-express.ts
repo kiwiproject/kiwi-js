@@ -1,29 +1,31 @@
 import { Response } from "express";
-import { ErrorMessage } from "../model/error-message";
+import {ErrorResponse} from "../model/error-response";
+import {ErrorMessage} from "../model/error-message";
 
 /**
  * Returns a 200 OK response if the entity contains a value. Otherwise, returns a 404 Not Found response with
  * a message stating that the entity was not found using the given identifier field and value.
  *
+ * @param res             the Express Response
  * @param identifierField the field which identifies the entity being looked up, e.g. "id"
  * @param identifier      the value of the identifier field, e.g. 42
  * @param entity          the entity or undefined
- * @param res             the Express Response
  */
 const standardGetResponseWithIdentifier = (
+  res: Response,
   identifierField: string,
   identifier: unknown,
   entity: unknown,
-  res: Response,
 ) => {
   if (entity !== undefined) {
     res.status(200).json(entity);
     return;
   }
 
-  standardNotFoundResponse(
+  standardNotFoundResponse(res,
     `Object with ${identifierField} ${identifier} not found`,
-    res,
+    identifierField,
+    identifier
   );
 };
 
@@ -31,45 +33,47 @@ const standardGetResponseWithIdentifier = (
  * Returns a 200 OK response if the entity is non-null. Otherwise, returns a 404 Not Found response with
  * the given detail message.
  *
+ * @param res             the Express Response
  * @param entity          the entity or undefined
  * @param notFoundMessage the specific message to use in the 404 response (if entity is undefined)
- * @param res             the Express Response
  */
 const standardGetResponseWithMessage = (
+  res: Response,
   entity: unknown,
   notFoundMessage: string,
-  res: Response,
 ) => {
   if (entity !== undefined) {
     res.status(200).json(entity);
     return;
   }
 
-  standardNotFoundResponse(notFoundMessage, res);
+  standardNotFoundResponse(res, notFoundMessage);
 };
 
 /**
- * Returns a 404 Not Found response containing an {@link ErrorMessage} entity which uses {@code errorDetails}
+ * Returns a 404 Not Found response containing an {@link ErrorResponse} entity which uses {@code notFoundMessage}
  * as the detailed error message.
  *
- * @param errorDetails the error message to use
  * @param res          the Express Response
+ * @param notFoundMessage the error message to use
+ * @param identifierField the field which identifies the entity being looked up, e.g. "id"
+ * @param identifier the value of the identifier field, e.g. 42
  */
-const standardNotFoundResponse = (errorDetails: string, res: Response) => {
-  res.status(404).json(new ErrorMessage(404, errorDetails).toMap());
+const standardNotFoundResponse = (res: Response, notFoundMessage: string, identifierField: string = undefined, identifier: unknown = undefined) => {
+  res.status(404).json(new ErrorResponse(notFoundMessage, identifierField, identifier).toMap());
 };
 
 /**
  * Returns a 201 Created response having the specified Location header and response entity.
  *
+ * @param res      the Express Response
  * @param location the value for the location header
  * @param entity   the new entity
- * @param res      the Express Response
  */
 const standardPostResponse = (
+  res: Response,
   location: string,
   entity: unknown,
-  res: Response,
 ) => {
   res.status(201).set("Location", location).json(entity);
 };
@@ -77,10 +81,10 @@ const standardPostResponse = (
 /**
  * Returns a 200 OK response having the specified response entity.
  *
- * @param entity the updated entity
  * @param res    the Express Response
+ * @param entity the updated entity
  */
-const standardPutResponse = (entity: unknown, res: Response) => {
+const standardPutResponse = (res: Response, entity: unknown) => {
   res.status(200).json(entity);
 };
 
@@ -96,54 +100,63 @@ const standardDeleteResponse = (res: Response) => {
 /**
  * Returns a 204 No Content response for DELETE requests and return an entity.
  *
- * @param deletedEntity the entity that was deleted
  * @param res           the Express Response
+ * @param deletedEntity the entity that was deleted
  */
 const standardDeleteResponseWithEntity = (
-  deletedEntity: unknown,
   res: Response,
+  deletedEntity: unknown,
 ) => {
   res.status(204).json(deletedEntity);
 };
 
 /**
- * Returns a 400 Bad Request response containing an {@link ErrorMessage} entity which uses {@code errorDetails}
+ * Returns a 400 Bad Request response containing an {@link ErrorResponse} entity which uses {@code errorDetails}
  * as the detailed error message.
  *
- * @param errorDetails the error message to use
  * @param res          the Express Response
+ * @param errorMessage the error message to use
+ * @param errors a list of errors (e.g. validation errors) to return
+ * @param identifierField an optional identifier field for the object
+ * @param identifier an optional identifier value for the object
  */
-const standardBadRequestResponse = (errorDetails: string, res: Response) => {
-  res.status(400).json(new ErrorMessage(400, errorDetails).toMap());
+const standardBadRequestResponse = (res: Response, errorMessage: string, errors: Array<ErrorMessage> = [], identifierField: string = undefined, identifier: unknown = undefined) => {
+  res.status(400).json(new ErrorResponse(errorMessage, identifierField, identifier, errors).toMap());
 };
 
 /**
- * Returns a 401 Unauthorized response containing an {@link ErrorMessage} entity which uses {@code errorDetails}
+ * Returns a 401 Unauthorized response containing an {@link ErrorResponse} entity which uses {@code errorMessage}
  * as the detailed error message.
  *
- * @param errorDetails the error message to use
  * @param res          the Express Response
+ * @param errorMessage the error message to use
  */
-const standardUnauthorizedResponse = (errorDetails: string, res: Response) => {
-  res.status(401).json(new ErrorMessage(401, errorDetails).toMap());
+const standardUnauthorizedResponse = (res: Response, errorMessage: string) => {
+  res.status(401).json(new ErrorResponse(errorMessage).toMap());
 };
 
 /**
- * Returns a response having the given status and an {@link ErrorMessage} entity which uses {@code errorDetails}
+ * Returns a response having the given status and an {@link ErrorResponse} entity which uses {@code errorMessage}
  * as the detailed error message.
  * <p>
  * Does not verify that the given status is actually an error status.
  *
  * @param status       the status code
- * @param errorDetails the error message to use
+ * @param errorMessage the error message to use
  * @param res          the Express Response
+ * @param errors  an optional list of extra error details to return
+ * @param identifierField an
+ * @param identifier
  */
 const standardErrorResponse = (
-  status: number,
-  errorDetails: string,
   res: Response,
+  status: number,
+  errorMessage: string,
+  errors: Array<ErrorMessage> = [],
+  identifierField: string = undefined,
+  identifier: unknown = undefined
 ) => {
-  res.status(status).json(new ErrorMessage(status, errorDetails).toMap());
+  res.status(status).json(new ErrorResponse(errorMessage, identifierField, identifier, errors).toMap());
 };
 
 /**
@@ -154,7 +167,7 @@ const standardErrorResponse = (
  * @param entity the accepted entity
  * @param res    the Express Response
  */
-const standardAcceptedResponse = (entity: unknown, res: Response) => {
+const standardAcceptedResponse = (res: Response, entity: unknown) => {
   res.status(202).json(entity);
 };
 
