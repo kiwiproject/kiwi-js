@@ -1,4 +1,4 @@
-import {ErrorMessage} from "./error-message";
+import { ErrorMessage } from "./error-message";
 
 /**
  * An error response that Kiwi uses to standardize HTTP error responses.
@@ -11,13 +11,13 @@ export class ErrorResponse {
   private readonly fieldName: string;
   private readonly itemId: unknown;
   private readonly message: string;
-  private readonly errors: Array<ErrorMessage>
+  private readonly errors: Array<ErrorMessage>;
 
   constructor(
     message: string,
     fieldName: string = "",
     itemId: unknown = "",
-    errors: Array<ErrorMessage> = []
+    errors: Array<ErrorMessage> = [],
   ) {
     this.itemId = itemId;
     this.message = message;
@@ -30,7 +30,9 @@ export class ErrorResponse {
       message: this.message,
       fieldName: this.fieldName,
       itemId: this.itemId,
-      errors: this.errors.map((error: ErrorMessage) => { return { message: error.message, fieldName: error.fieldName }})
+      errors: this.errors.map((error: ErrorMessage) => {
+        return { message: error.message, fieldName: error.fieldName };
+      }),
     };
   }
 }

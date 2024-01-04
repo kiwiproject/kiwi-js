@@ -7,10 +7,7 @@ export class ErrorMessage {
   readonly fieldName: string;
   readonly message: string;
 
-  constructor(
-    message: string,
-    fieldName: string ,
-  ) {
+  constructor(message: string, fieldName: string) {
     this.message = message;
     this.fieldName = fieldName;
   }

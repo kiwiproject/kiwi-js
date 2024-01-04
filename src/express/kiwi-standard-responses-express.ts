@@ -1,6 +1,6 @@
 import { Response } from "express";
-import {ErrorResponse} from "../model/error-response";
-import {ErrorMessage} from "../model/error-message";
+import { ErrorResponse } from "../model/error-response";
+import { ErrorMessage } from "../model/error-message";
 
 /**
  * Returns a 200 OK response if the entity contains a value. Otherwise, returns a 404 Not Found response with
@@ -22,10 +22,11 @@ const standardGetResponseWithIdentifier = (
     return;
   }
 
-  standardNotFoundResponse(res,
+  standardNotFoundResponse(
+    res,
     `Object with ${identifierField} ${identifier} not found`,
     identifierField,
-    identifier
+    identifier,
   );
 };
 
@@ -59,8 +60,17 @@ const standardGetResponseWithMessage = (
  * @param identifierField the field which identifies the entity being looked up, e.g. "id"
  * @param identifier the value of the identifier field, e.g. 42
  */
-const standardNotFoundResponse = (res: Response, notFoundMessage: string, identifierField: string = undefined, identifier: unknown = undefined) => {
-  res.status(404).json(new ErrorResponse(notFoundMessage, identifierField, identifier).toMap());
+const standardNotFoundResponse = (
+  res: Response,
+  notFoundMessage: string,
+  identifierField: string = undefined,
+  identifier: unknown = undefined,
+) => {
+  res
+    .status(404)
+    .json(
+      new ErrorResponse(notFoundMessage, identifierField, identifier).toMap(),
+    );
 };
 
 /**
@@ -120,8 +130,23 @@ const standardDeleteResponseWithEntity = (
  * @param identifierField an optional identifier field for the object
  * @param identifier an optional identifier value for the object
  */
-const standardBadRequestResponse = (res: Response, errorMessage: string, errors: Array<ErrorMessage> = [], identifierField: string = undefined, identifier: unknown = undefined) => {
-  res.status(400).json(new ErrorResponse(errorMessage, identifierField, identifier, errors).toMap());
+const standardBadRequestResponse = (
+  res: Response,
+  errorMessage: string,
+  errors: Array<ErrorMessage> = [],
+  identifierField: string = undefined,
+  identifier: unknown = undefined,
+) => {
+  res
+    .status(400)
+    .json(
+      new ErrorResponse(
+        errorMessage,
+        identifierField,
+        identifier,
+        errors,
+      ).toMap(),
+    );
 };
 
 /**
@@ -154,9 +179,18 @@ const standardErrorResponse = (
   errorMessage: string,
   errors: Array<ErrorMessage> = [],
   identifierField: string = undefined,
-  identifier: unknown = undefined
+  identifier: unknown = undefined,
 ) => {
-  res.status(status).json(new ErrorResponse(errorMessage, identifierField, identifier, errors).toMap());
+  res
+    .status(status)
+    .json(
+      new ErrorResponse(
+        errorMessage,
+        identifierField,
+        identifier,
+        errors,
+      ).toMap(),
+    );
 };
 
 /**
