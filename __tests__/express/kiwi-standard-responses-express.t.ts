@@ -164,6 +164,20 @@ describe("KiwiStandardResponses", () => {
     });
   });
 
+  describe("standardForbiddenResponse", () => {
+    it("should setup a standard 403 response", () => {
+      KiwiStandardResponsesExpress.standardForbiddenResponse(res, "No soup for you");
+
+      expect(res.status).toHaveBeenCalledWith(403);
+      expect(res.json).toHaveBeenCalledWith({
+        message: "No soup for you",
+        fieldName: "",
+        itemId: "",
+        errors: [],
+      });
+    });
+  });
+
   describe("standardErrorResponse", () => {
     it("should setup a standard error response with given status", () => {
       KiwiStandardResponsesExpress.standardErrorResponse(res, 500, "Whoops");
