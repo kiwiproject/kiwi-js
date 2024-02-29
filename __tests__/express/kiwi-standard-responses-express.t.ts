@@ -166,7 +166,10 @@ describe("KiwiStandardResponses", () => {
 
   describe("standardForbiddenResponse", () => {
     it("should setup a standard 403 response", () => {
-      KiwiStandardResponsesExpress.standardForbiddenResponse(res, "No soup for you");
+      KiwiStandardResponsesExpress.standardForbiddenResponse(
+        res,
+        "No soup for you",
+      );
 
       expect(res.status).toHaveBeenCalledWith(403);
       expect(res.json).toHaveBeenCalledWith({
