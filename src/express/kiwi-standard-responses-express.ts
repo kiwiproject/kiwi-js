@@ -172,6 +172,19 @@ const standardForbiddenResponse = (res: Response, errorMessage: string) => {
 };
 
 /**
+ * Returns a 403 Forbidden response containing a provided entity.
+ *
+ * @param res          the Express Response
+ * @param entity the entity to use
+ */
+const standardForbiddenResponseWithEntity = (
+  res: Response,
+  entity: unknown,
+) => {
+  res.status(403).json(entity);
+};
+
+/**
  * Returns a response having the given status and an {@link ErrorResponse} entity which uses {@code errorMessage}
  * as the detailed error message.
  * <p>
@@ -227,6 +240,7 @@ export const KiwiStandardResponsesExpress = {
   standardErrorResponse,
   standardUnauthorizedResponse,
   standardForbiddenResponse,
+  standardForbiddenResponseWithEntity,
   standardNotFoundResponse,
   standardBadRequestResponse,
 };
