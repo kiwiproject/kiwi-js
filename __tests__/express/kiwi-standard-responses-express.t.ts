@@ -181,6 +181,19 @@ describe("KiwiStandardResponses", () => {
     });
   });
 
+  describe("standardForbiddenResponseWithEntity", () => {
+    it("should setup a standard 403 response", () => {
+      KiwiStandardResponsesExpress.standardForbiddenResponseWithEntity(res, {
+        foo: "bar",
+      });
+
+      expect(res.status).toHaveBeenCalledWith(403);
+      expect(res.json).toHaveBeenCalledWith({
+        foo: "bar",
+      });
+    });
+  });
+
   describe("standardErrorResponse", () => {
     it("should setup a standard error response with given status", () => {
       KiwiStandardResponsesExpress.standardErrorResponse(res, 500, "Whoops");
