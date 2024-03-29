@@ -22,7 +22,7 @@
     ]
   },
   "dependencies": {
-    "express": "4.19.1"
+    "express": "4.19.2"
   },
   "devDependencies": {
     "@babel/core": "7.24.3",
