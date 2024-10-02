@@ -17,17 +17,18 @@ const standardGetResponseWithIdentifier = (
   identifier: unknown,
   entity: unknown,
 ) => {
-  if (entity !== undefined) {
-    res.status(200).json(entity);
+  if (entity === undefined || entity === null) {
+    standardNotFoundResponse(
+      res,
+      `Object with ${identifierField} ${identifier} not found`,
+      identifierField,
+      identifier,
+    );
     return;
   }
 
-  standardNotFoundResponse(
-    res,
-    `Object with ${identifierField} ${identifier} not found`,
-    identifierField,
-    identifier,
-  );
+  res.status(200).json(entity);
+  return;
 };
 
 /**
@@ -43,12 +44,13 @@ const standardGetResponseWithMessage = (
   entity: unknown,
   notFoundMessage: string,
 ) => {
-  if (entity !== undefined) {
-    res.status(200).json(entity);
+  if (entity === undefined || entity === null) {
+    standardNotFoundResponse(res, notFoundMessage);
     return;
   }
 
-  standardNotFoundResponse(res, notFoundMessage);
+  res.status(200).json(entity);
+  return;
 };
 
 /**
