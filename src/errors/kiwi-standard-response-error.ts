@@ -4,7 +4,7 @@ export default class KiwiStandardResponseError extends Error {
 
   constructor(message: string, statusCode: number, nestedError?: Error) {
     super(message);
-    this.name = 'KiwiStandardError';
+    this.name = "KiwiStandardResponseError";
     this.statusCode = statusCode;
     this.nestedError = nestedError;
 
