@@ -32,7 +32,7 @@
     "@eslint/js": "9.39.2",
     "@jest/globals": "30.2.0",
     "@types/express": "5.0.6",
-    "@types/node": "25.0.2",
+    "@types/node": "25.0.3",
     "babel-jest": "30.2.0",
     "eslint": "9.39.2",
     "eslint-config-prettier": "10.1.8",
@@ -41,6 +41,6 @@
     "jest": "30.2.0",
     "prettier": "3.7.4",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.49.0"
+    "typescript-eslint": "8.50.0"
   }
 }
