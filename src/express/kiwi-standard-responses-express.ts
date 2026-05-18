@@ -65,7 +65,7 @@ const standardGetResponseWithMessage = (
 const standardNotFoundResponse = (
   res: Response,
   notFoundMessage: string,
-  identifierField: string = undefined,
+  identifierField: string | undefined = undefined,
   identifier: unknown = undefined,
 ) => {
   res
@@ -136,7 +136,7 @@ const standardBadRequestResponse = (
   res: Response,
   errorMessage: string,
   errors: Array<ErrorMessage> = [],
-  identifierField: string = undefined,
+  identifierField: string | undefined = undefined,
   identifier: unknown = undefined,
 ) => {
   res
@@ -204,7 +204,7 @@ const standardErrorResponse = (
   status: number,
   errorMessage: string,
   errors: Array<ErrorMessage> = [],
-  identifierField: string = undefined,
+  identifierField: string | undefined = undefined,
   identifier: unknown = undefined,
 ) => {
   res

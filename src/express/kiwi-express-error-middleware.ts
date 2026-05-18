@@ -3,7 +3,7 @@ import { KiwiStandardResponsesExpress } from "./kiwi-standard-responses-express"
 import KiwiStandardResponseError from "../errors/kiwi-standard-response-error";
 
 export function setupFallback(
-  logger: (msg: string, stack?: string) => void | undefined = undefined,
+  logger?: (msg: string, stack?: string) => void,
 ) {
   return (err: Error, req: Request, res: Response, next: NextFunction) => {
     if (err.name === "KiwiNotLoggedInError") {
