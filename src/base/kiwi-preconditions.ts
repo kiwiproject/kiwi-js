@@ -5,7 +5,10 @@ const checkPositiveOrZero = (
   checkState(value >= 0, errorMessage);
 };
 
-const checkState = (expression: boolean, errorMessage: string = undefined) => {
+const checkState = (
+  expression: boolean,
+  errorMessage: string | undefined = undefined,
+) => {
   if (!expression) {
     const fullErrorMessage: string =
       errorMessage === undefined
@@ -24,14 +27,14 @@ const checkPositive = (
 
 const checkArgumentDefined = (
   reference: unknown,
-  errorMessage: string = undefined,
+  errorMessage: string | undefined = undefined,
 ) => {
   checkArgument(reference !== undefined && reference !== null, errorMessage);
 };
 
 const checkArgument = (
   expression: boolean,
-  errorMessage: string = undefined,
+  errorMessage: string | undefined = undefined,
 ) => {
   if (!expression) {
     const fullErrorMessage: string =
@@ -44,7 +47,7 @@ const checkArgument = (
 
 const checkArgumentNotBlank = (
   str: string,
-  errorMessage: string = undefined,
+  errorMessage: string | undefined = undefined,
 ) => {
   checkArgumentDefined(str, errorMessage);
   checkArgument(str !== "", errorMessage);
