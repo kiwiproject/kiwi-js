@@ -35,9 +35,9 @@
   },
   "devDependencies": {
     "semantic-release": "^25.0.2",
-    "@babel/core": "7.29.0",
-    "@babel/preset-env": "7.29.5",
-    "@babel/preset-typescript": "7.28.5",
+    "@babel/core": "7.29.7",
+    "@babel/preset-env": "7.29.7",
+    "@babel/preset-typescript": "7.29.7",
     "@eslint/eslintrc": "3.3.5",
     "@eslint/js": "10.0.1",
     "@jest/globals": "30.4.1",
@@ -51,6 +51,6 @@
     "jest": "30.4.2",
     "prettier": "3.8.3",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.59.4"
+    "typescript-eslint": "8.60.0"
   }
 }
