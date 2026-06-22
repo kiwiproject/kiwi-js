@@ -46,7 +46,7 @@ export class KiwiPage {
   /**
    * Describes any sort that is active for the pagination. Default value is null.
    */
-  sort: KiwiSort;
+  sort: KiwiSort | undefined;
 
   /**
    * Allows adjustment for instance where pagination starts with one instead of zero.
@@ -65,7 +65,7 @@ export class KiwiPage {
     numberOfElements: number,
     totalPages: number,
     totalElements: number,
-    sort: KiwiSort,
+    sort: KiwiSort | undefined,
   ) {
     this.content = content;
     this.size = size;
