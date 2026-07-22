@@ -35,9 +35,9 @@
   },
   "devDependencies": {
     "semantic-release": "^25.0.2",
-    "@babel/core": "7.29.7",
-    "@babel/preset-env": "7.29.7",
-    "@babel/preset-typescript": "7.29.7",
+    "@babel/core": "8.0.1",
+    "@babel/preset-env": "8.0.2",
+    "@babel/preset-typescript": "8.0.1",
     "@eslint/eslintrc": "3.3.6",
     "@eslint/js": "10.0.1",
     "@jest/globals": "30.4.1",
