@@ -34,7 +34,9 @@
     "express": "5.2.1"
   },
   "overrides": {
-    "undici": "^7.29.0"
+    "@actions/http-client": {
+      "undici": "^7.29.0"
+    }
   },
   "devDependencies": {
     "semantic-release": "^25.0.2",
